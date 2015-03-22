@@ -1,0 +1,22 @@
+# the database is expected to already exist, use
+# a command like this to prime a new one:
+# docker run -name abdata tacodata/abroute-docker-postgres abinit
+# it must exist, not be running, and be named abdata
+
+pg:
+  image: tacodata/abroute-docker-postgres
+  ports:
+    - "5432:5432"
+  volumes_from:
+    - abdata
+  command: absql
+router:
+  image: tacodata/abroute-docker-autobahn
+  ports:
+    - "8080:8080"
+  links:
+    - pg
+rpc:
+  image: tacodata/abroute-docker-rpc
+  links:
+    - router
