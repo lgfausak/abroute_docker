@@ -35,16 +35,19 @@ The steps above are provided for information only, the compose brings them up, y
 do not need to do it.  To exercise this application you could run commands like this:
 
 ```
-docker run --link router:router --rm tacodata/abroute-docker-adm -u sys -s 123test user list
-docker run --link router:router --rm tacodata/abroute-docker-adm -u sys -s 123test session list
-docker run --link router:router --rm tacodata/abroute-docker-adm -u sys -s 123test topic list
-docker run --link router:router --rm tacodata/abroute-docker-adm -u sys -s 123test role list
+docker run --link abroutedocker_router_1:router --rm tacodata/abroute-docker-adm -u sys -s 123test user list
+docker run --link abroutedocker_router_1:router --rm tacodata/abroute-docker-adm -u sys -s 123test session list
+docker run --link abroutedocker_router_1:router --rm tacodata/abroute-docker-adm -u sys -s 123test topic list
+docker run --link abroutedocker_router_1:router --rm tacodata/abroute-docker-adm -u sys -s 123test role list
 ```
+
+The name of the router is somewhat arbitrary, you might need to look it up with the docker ps command
+if the example doesn't work.
 
 To get a list of all the commands that can be run from the adm container:
 
 ```
-$ docker run --link router:router --rm tacodata/abroute-docker-adm --help
+$ docker run --link abroutedocker_router_1:router --rm tacodata/abroute-docker-adm --help
 
 usage: sqladm [-h] [-w WSOCKET] [-r REALM] [-v] [-u USER] [-s PASSWORD]
               [-t TOPIC_BASE]
@@ -76,7 +79,7 @@ optional arguments:
 To get help for a specific command, like user, you could:
 
 ```
-$ docker run --link router:router --rm tacodata/abroute-docker-adm user --help
+$ docker run --link abroutedocker_router_1:router --rm tacodata/abroute-docker-adm user --help
 
 usage: sqladm session [-h] [-a ACTION_ARGS] {list,get,kill}
 
