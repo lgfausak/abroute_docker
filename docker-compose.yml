@@ -3,12 +3,20 @@
 # docker run -name abdata tacodata/abroute-docker-postgres abinit
 # it must exist, not be running, and be named abdata
 
+# docker run -name abdata tacodata/abroute-docker-postgres abinit
+# docker-compose -f abinit.yml up
+#abdata:
+#  image: tacodata/abroute-docker-postgres
+#  command: abinit
+#  i don't know how to run this in the compose
+#  i want to use the abinit to initialize the postgres database, but, it never
+#  needs to be run again
 pg:
   image: tacodata/abroute-docker-postgres
   ports:
     - "5432:5432"
   volumes_from:
-    - abdata
+    - abroutedocker_abdata_1
   command: absql
 router:
   image: tacodata/abroute-docker-autobahn

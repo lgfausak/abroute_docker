@@ -1,0 +1,5 @@
+# the database is expected to already exist, use
+# docker run -name abdata tacodata/abroute-docker-postgres abinit
+abdata:
+  image: tacodata/abroute-docker-postgres
+  command: abinit
