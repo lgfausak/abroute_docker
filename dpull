@@ -1,0 +1,7 @@
+#!/bin/bash
+docker pull tacodata/abroute-docker-base
+docker pull tacodata/abroute-docker-db
+docker pull tacodata/abroute-docker-postgres
+docker pull tacodata/abroute-docker-autobahn
+docker pull tacodata/abroute-docker-rpc
+docker pull tacodata/abroute-docker-adm

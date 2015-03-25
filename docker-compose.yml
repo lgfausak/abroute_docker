@@ -2,21 +2,22 @@
 # a command like this to prime a new one:
 # docker run -name abdata tacodata/abroute-docker-postgres abinit
 # it must exist, not be running, and be named abdata
-
-# docker run -name abdata tacodata/abroute-docker-postgres abinit
+# this isn't the way to do it, but, I can't figure out
+# any other ways to compose it.
+# you could:
 # docker-compose -f abinit.yml up
-#abdata:
-#  image: tacodata/abroute-docker-postgres
-#  command: abinit
-#  i don't know how to run this in the compose
-#  i want to use the abinit to initialize the postgres database, but, it never
-#  needs to be run again
+# then mount the volume, probably a better way, but it requires more than one 'compose' step
+abdata:
+  image: tacodata/abroute-docker-db
+  command: 8080
+  expose:
+    - 8080
 pg:
   image: tacodata/abroute-docker-postgres
-  ports:
-    - "5432:5432"
+  links:
+    - abdata
   volumes_from:
-    - abroutedocker_abdata_1
+    - abdata
   command: absql
 router:
   image: tacodata/abroute-docker-autobahn
@@ -28,3 +29,6 @@ rpc:
   image: tacodata/abroute-docker-rpc
   links:
     - router
+
+# here is a sample command:
+# docker run -it --link abroutedocker_router_1:router tacodata/abroute-docker-adm -u sys -s 123test user list
