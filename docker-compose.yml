@@ -12,7 +12,7 @@ abdata:
   # expose only maps the port to a linked container.
   # ports will do expose, + the port is mapped to the host
   expose:
-          - "8000"
+    - "8000"
   # this image has an ENTRYPOINT, we can
   # pass a command which ends up being an argument
   # this argument indicates what port to monitor
