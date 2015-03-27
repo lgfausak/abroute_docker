@@ -9,9 +9,14 @@
 # then mount the volume, probably a better way, but it requires more than one 'compose' step
 abdata:
   image: tacodata/abroute-docker-db
-  command: 8080
+  # expose only maps the port to a linked container.
+  # ports will do expose, + the port is mapped to the host
   expose:
-    - 8080
+          - "8000"
+  # this image has an ENTRYPOINT, we can
+  # pass a command which ends up being an argument
+  # this argument indicates what port to monitor
+  command: "8000"
 pg:
   image: tacodata/abroute-docker-postgres
   links:
